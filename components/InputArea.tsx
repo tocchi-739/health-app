@@ -14,7 +14,7 @@ export const InputArea = (props: props) => {
     <div>
       <input
         name="weight"
-        type="text"
+        type="number"
         placeholder="体重"
         autoFocus={true}
         onChange={handleChange}
@@ -22,21 +22,21 @@ export const InputArea = (props: props) => {
       />
       <input
         name="fatPercent"
-        type="text"
+        type="number"
         placeholder="体脂肪率"
         onChange={handleChange}
         value={record.fatPercent}
       />
       <input
         name="visceralFatLevel"
-        type="text"
+        type="number"
         placeholder="内臓脂肪レベル"
         onChange={handleChange}
         value={record.visceralFatLevel}
       />
       <input
         name="bmi"
-        type="text"
+        type="number"
         placeholder="BMI"
         onChange={handleChange}
         value={record.bmi}
