@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useState } from "react";
+import { InputArea } from "../components/InputArea";
+import { DisPlayArea } from "../components/DisplayArea";
 
 const Home: NextPage = () => {
   interface data {
@@ -46,62 +48,12 @@ const Home: NextPage = () => {
         <h1>Health App!</h1>
       </header>
       <main>
-        <div>
-          <input
-            name="weight"
-            type="text"
-            placeholder="体重"
-            autoFocus={true}
-            onChange={handleChange}
-            value={record.weight}
-          />
-          <input
-            name="fatPercent"
-            type="text"
-            placeholder="体脂肪率"
-            onChange={handleChange}
-            value={record.fatPercent}
-          />
-          <input
-            name="visceralFatLevel"
-            type="text"
-            placeholder="内臓脂肪レベル"
-            onChange={handleChange}
-            value={record.visceralFatLevel}
-          />
-          <input
-            name="bmi"
-            type="text"
-            placeholder="BMI"
-            onChange={handleChange}
-            value={record.bmi}
-          />
-          <button onClick={handleClick}>登録</button>
-        </div>
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>体重</th>
-                <th>体脂肪率</th>
-                <th>内臓脂肪レベル</th>
-                <th>BMI</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((d, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{d.weight}</td>
-                    <td>{d.fatPercent}</td>
-                    <td>{d.visceralFatLevel}</td>
-                    <td>{d.bmi}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <InputArea
+          handleChange={handleChange}
+          handleClick={handleClick}
+          record={record}
+        />
+        <DisPlayArea data={data} />
       </main>
 
       <footer></footer>
