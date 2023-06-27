@@ -1,10 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import { useState } from "react";
 import { InputArea } from "../components/InputArea";
 import { DisPlayArea } from "../components/DisplayArea";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { app } from "../firebase/firebase";
 
+const db = getFirestore(app);
 const Home: NextPage = () => {
   interface data {
     weight: string;
@@ -13,7 +16,6 @@ const Home: NextPage = () => {
     bmi: string;
   }
 
-  const [data, setData] = useState<data[]>([]);
   const [record, setRecord] = useState({
     weight: "",
     fatPercent: "",
@@ -22,13 +24,28 @@ const Home: NextPage = () => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRecord((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    if (e.target.name === "visceralFatLevel" && e.target.value.length > 1) {
+      alert("文字数オーバーです");
+    } else if (
+      e.target.name !== "visceralFatLevel" &&
+      e.target.value.length > 4
+    ) {
+      alert("文字数オーバーです");
+    } else {
+      setRecord((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
-  const handleClick = () => {
-    setData((data) => [...data, record]);
+  const handleClick = async () => {
+    // setData((data) => [...data, record]);
+    const docRef = await addDoc(collection(db, "health-data"), {
+      weight: record.weight,
+      fatPercent: record.fatPercent,
+      visceralFatLevel: record.visceralFatLevel,
+      bmi: record.bmi,
+    });
     setRecord({
       weight: "",
       fatPercent: "",
@@ -53,7 +70,7 @@ const Home: NextPage = () => {
           handleClick={handleClick}
           record={record}
         />
-        <DisPlayArea data={data} />
+        <DisPlayArea />
       </main>
 
       <footer></footer>

@@ -1,3 +1,5 @@
+import styles from "../../styles/Home.module.css";
+
 interface props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClick: () => void;
@@ -11,10 +13,11 @@ interface props {
 export const InputArea = (props: props) => {
   const { handleChange, handleClick, record } = props;
   return (
-    <div>
+    <div className={styles.inputArea}>
+      <input type="date" />
       <input
         name="weight"
-        type="text"
+        type="number"
         placeholder="体重"
         autoFocus={true}
         onChange={handleChange}
@@ -22,21 +25,21 @@ export const InputArea = (props: props) => {
       />
       <input
         name="fatPercent"
-        type="text"
+        type="number"
         placeholder="体脂肪率"
         onChange={handleChange}
         value={record.fatPercent}
       />
       <input
         name="visceralFatLevel"
-        type="text"
+        type="number"
         placeholder="内臓脂肪レベル"
         onChange={handleChange}
         value={record.visceralFatLevel}
       />
       <input
         name="bmi"
-        type="text"
+        type="number"
         placeholder="BMI"
         onChange={handleChange}
         value={record.bmi}
