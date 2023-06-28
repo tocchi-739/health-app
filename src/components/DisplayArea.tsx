@@ -22,13 +22,25 @@ export const DisPlayArea = () => {
     }
     getData(db);
     console.log(firebaseData);
-  }, [1000]);
+  }, []);
+
+  const sortedList = firebaseData?.sort(function (
+    a: DocumentData,
+    b: DocumentData
+  ) {
+    if (a.date < b.date) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
 
   return (
     <div className={styles.displayArea}>
       <table>
         <thead>
           <tr>
+            <th>日付</th>
             <th>体重</th>
             <th>体脂肪率</th>
             <th>内臓脂肪レベル</th>
@@ -36,9 +48,10 @@ export const DisPlayArea = () => {
           </tr>
         </thead>
         <tbody>
-          {firebaseData?.map((d: DocumentData, index: string) => {
+          {sortedList?.map((d: DocumentData, index: string) => {
             return (
               <tr key={index}>
+                <td>{d.date}</td>
                 <td>{d.weight}</td>
                 <td>{d.fatPercent}</td>
                 <td>{d.visceralFatLevel}</td>
