@@ -2,8 +2,10 @@ import styles from "../../styles/Home.module.css";
 
 interface props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClick: () => void;
   record: {
+    date: string;
     weight: string;
     fatPercent: string;
     visceralFatLevel: string;
@@ -11,10 +13,16 @@ interface props {
   };
 }
 export const InputArea = (props: props) => {
-  const { handleChange, handleClick, record } = props;
+  const { handleChange, handleChangeDate, handleClick, record } = props;
+
   return (
     <div className={styles.inputArea}>
-      <input type="date" />
+      <input
+        name="date"
+        type="date"
+        onChange={handleChangeDate}
+        value={record.date}
+      />
       <input
         name="weight"
         type="number"
