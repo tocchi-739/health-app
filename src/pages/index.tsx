@@ -52,6 +52,7 @@ const Home: NextPage = () => {
       visceralFatLevel: "",
       bmi: "",
     });
+    window.location.reload();
   };
 
   return (

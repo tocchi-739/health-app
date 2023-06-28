@@ -22,7 +22,7 @@ export const DisPlayArea = () => {
     }
     getData(db);
     console.log(firebaseData);
-  }, [1000]);
+  }, []);
 
   return (
     <div className={styles.displayArea}>
