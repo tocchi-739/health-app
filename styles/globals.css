@@ -33,6 +33,9 @@ th {
 td {
   text-align: center;
 }
+button {
+  height: 40px;
+}
 
 @media (prefers-color-scheme: dark) {
   html {

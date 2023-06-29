@@ -1,4 +1,5 @@
 import styles from "../../styles/Home.module.css";
+import { Button } from "./Button";
 
 interface props {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -52,7 +53,7 @@ export const InputArea = (props: props) => {
         onChange={handleChange}
         value={record.bmi}
       />
-      <button onClick={handleClick}>登録</button>
+      <Button text="登録" handleClick={handleClick} />
     </div>
   );
 };
