@@ -9,13 +9,6 @@ import { app } from "../firebase/firebase";
 
 const db = getFirestore(app);
 const Home: NextPage = () => {
-  interface data {
-    weight: string;
-    fatPercent: string;
-    visceralFatLevel: string;
-    bmi: string;
-  }
-
   const [record, setRecord] = useState({
     date: "",
     weight: "",
@@ -44,11 +37,13 @@ const Home: NextPage = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "visceralFatLevel" && e.target.value.length > 1) {
       alert("文字数オーバーです");
+      return;
     } else if (
       e.target.name !== "visceralFatLevel" &&
       e.target.value.length > 4
     ) {
       alert("文字数オーバーです");
+      return;
     } else {
       setRecord((prev) => ({
         ...prev,
@@ -61,7 +56,6 @@ const Home: NextPage = () => {
     setDate(newDate);
   };
   const handleClick = async () => {
-    // setData((data) => [...data, record]);
     if (
       record.date === "" ||
       record.weight === "" ||
@@ -70,6 +64,7 @@ const Home: NextPage = () => {
       record.bmi === ""
     ) {
       alert("未入力の箇所があります");
+      return;
     }
     const docRef = await addDoc(collection(db, "health-data"), {
       date: record.date,

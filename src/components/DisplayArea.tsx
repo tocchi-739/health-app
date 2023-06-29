@@ -21,7 +21,6 @@ export const DisPlayArea = () => {
       setFirebaseData(dataList);
     }
     getData(db);
-    console.log(firebaseData);
   }, []);
 
   const sortedList = firebaseData?.sort(function (
