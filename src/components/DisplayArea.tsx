@@ -21,7 +21,6 @@ export const DisPlayArea = () => {
       setFirebaseData(dataList);
     }
     getData(db);
-    console.log(firebaseData);
   }, []);
 
   const sortedList = firebaseData?.sort(function (
@@ -51,7 +50,7 @@ export const DisPlayArea = () => {
           {sortedList?.map((d: DocumentData, index: string) => {
             return (
               <tr key={index}>
-                <td>{d.date}</td>
+                <td>{d.date.substring(5).replace("-", "/")}</td>
                 <td>{d.weight}</td>
                 <td>{d.fatPercent}</td>
                 <td>{d.visceralFatLevel}</td>
