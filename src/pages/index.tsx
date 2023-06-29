@@ -62,6 +62,15 @@ const Home: NextPage = () => {
   };
   const handleClick = async () => {
     // setData((data) => [...data, record]);
+    if (
+      record.date === "" ||
+      record.weight === "" ||
+      record.fatPercent === "" ||
+      record.visceralFatLevel === "" ||
+      record.bmi === ""
+    ) {
+      alert("未入力の箇所があります");
+    }
     const docRef = await addDoc(collection(db, "health-data"), {
       date: record.date,
       weight: record.weight,
