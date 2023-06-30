@@ -31,6 +31,7 @@ export const InputArea = (props: props) => {
         autoFocus={true}
         onChange={handleChange}
         value={record.weight}
+        maxLength={4}
       />
       <input
         name="fatPercent"
@@ -38,6 +39,7 @@ export const InputArea = (props: props) => {
         placeholder="体脂肪率"
         onChange={handleChange}
         value={record.fatPercent}
+        maxLength={4}
       />
       <input
         name="visceralFatLevel"
@@ -45,6 +47,7 @@ export const InputArea = (props: props) => {
         placeholder="内臓脂肪レベル"
         onChange={handleChange}
         value={record.visceralFatLevel}
+        maxLength={1}
       />
       <input
         name="bmi"
@@ -52,6 +55,7 @@ export const InputArea = (props: props) => {
         placeholder="BMI"
         onChange={handleChange}
         value={record.bmi}
+        maxLength={4}
       />
       <Button text="登録" handleClick={handleClick} />
     </div>

@@ -35,19 +35,26 @@ const Home: NextPage = () => {
   }, [date?.getDate()]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "visceralFatLevel" && e.target.value.length > 1) {
+    const target = e.target;
+    const maxLength = target.getAttribute("maxLength");
+    const currentLength = target.value.length;
+
+    if (currentLength === Number(maxLength)) {
+      const nextInput = target.nextElementSibling;
+      if (nextInput instanceof HTMLInputElement) {
+        nextInput.focus();
+      }
+    }
+    if (target.name === "visceralFatLevel" && target.value.length > 1) {
       alert("文字数オーバーです");
       return;
-    } else if (
-      e.target.name !== "visceralFatLevel" &&
-      e.target.value.length > 4
-    ) {
+    } else if (target.name !== "visceralFatLevel" && target.value.length > 4) {
       alert("文字数オーバーです");
       return;
     } else {
       setRecord((prev) => ({
         ...prev,
-        [e.target.name]: e.target.value,
+        [target.name]: target.value,
       }));
     }
   };
