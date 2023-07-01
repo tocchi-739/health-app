@@ -78,6 +78,17 @@ const Home: NextPage = () => {
       alert("未入力の箇所があります");
       return;
     }
+    const regex = /\d{2}\.\d/;
+    if (!regex.test(record.weight)) {
+      alert("体重の入力に誤りがあります");
+      return;
+    } else if (!regex.test(record.fatPercent)) {
+      alert("体脂肪率の入力に誤りがあります");
+      return;
+    } else if (!regex.test(record.bmi)) {
+      alert("BMIの入力に誤りがあります");
+      return;
+    }
     const docRef = await addDoc(collection(db, "health-data"), {
       date: record.date,
       weight: record.weight,
