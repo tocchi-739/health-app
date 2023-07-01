@@ -143,7 +143,7 @@ export const InputArea = () => {
             id="weight"
             name="weight"
             type="text"
-            inputMode="numeric"
+            inputMode="decimal"
             pattern="\d{2}\.\d"
             placeholder="○○,○"
             autoFocus={true}
@@ -159,7 +159,7 @@ export const InputArea = () => {
             id="fatPercent"
             name="fatPercent"
             type="text"
-            inputMode="numeric"
+            inputMode="decimal"
             pattern="\d{2}\.\d"
             placeholder="○○,○"
             onChange={handleChange}
@@ -174,7 +174,7 @@ export const InputArea = () => {
             id="visceralFatLevel"
             name="visceralFatLevel"
             type="text"
-            inputMode="numeric"
+            inputMode="decimal"
             pattern="\d"
             placeholder="○"
             onChange={handleChange}
@@ -189,7 +189,7 @@ export const InputArea = () => {
             id="bmi"
             name="bmi"
             type="text"
-            inputMode="numeric"
+            inputMode="decimal"
             pattern="\d{2}\.\d"
             placeholder="○○,○"
             onChange={handleChange}
