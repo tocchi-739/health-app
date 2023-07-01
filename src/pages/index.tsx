@@ -39,11 +39,16 @@ const Home: NextPage = () => {
     const maxLength = target.getAttribute("maxLength");
     const currentLength = target.value.length;
 
-    if (currentLength === Number(maxLength)) {
+    if (currentLength >= Number(maxLength)) {
       const nextInput = target.nextElementSibling;
       if (nextInput instanceof HTMLInputElement) {
         nextInput.focus();
       }
+    } else {
+      setRecord((prev) => ({
+        ...prev,
+        [target.name]: target.value,
+      }));
     }
     if (target.name === "visceralFatLevel" && target.value.length > 1) {
       alert("文字数オーバーです");
@@ -71,6 +76,17 @@ const Home: NextPage = () => {
       record.bmi === ""
     ) {
       alert("未入力の箇所があります");
+      return;
+    }
+    const regex = /\d{2}\.\d/;
+    if (!regex.test(record.weight)) {
+      alert("体重の入力に誤りがあります");
+      return;
+    } else if (!regex.test(record.fatPercent)) {
+      alert("体脂肪率の入力に誤りがあります");
+      return;
+    } else if (!regex.test(record.bmi)) {
+      alert("BMIの入力に誤りがあります");
       return;
     }
     const docRef = await addDoc(collection(db, "health-data"), {
