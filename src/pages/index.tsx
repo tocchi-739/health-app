@@ -39,11 +39,16 @@ const Home: NextPage = () => {
     const maxLength = target.getAttribute("maxLength");
     const currentLength = target.value.length;
 
-    if (currentLength === Number(maxLength)) {
+    if (currentLength >= Number(maxLength)) {
       const nextInput = target.nextElementSibling;
       if (nextInput instanceof HTMLInputElement) {
         nextInput.focus();
       }
+    } else {
+      setRecord((prev) => ({
+        ...prev,
+        [target.name]: target.value,
+      }));
     }
     if (target.name === "visceralFatLevel" && target.value.length > 1) {
       alert("文字数オーバーです");
