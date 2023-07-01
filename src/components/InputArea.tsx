@@ -142,7 +142,9 @@ export const InputArea = () => {
             ref={weightRef}
             id="weight"
             name="weight"
-            type="number"
+            type="text"
+            inputMode="numeric"
+            pattern="\d{2}\.\d"
             placeholder="○○,○"
             autoFocus={true}
             onChange={handleChange}
@@ -156,7 +158,9 @@ export const InputArea = () => {
             ref={fatPercentRef}
             id="fatPercent"
             name="fatPercent"
-            type="number"
+            type="text"
+            inputMode="numeric"
+            pattern="\d{2}\.\d"
             placeholder="○○,○"
             onChange={handleChange}
             value={record.fatPercent}
@@ -169,7 +173,9 @@ export const InputArea = () => {
             ref={visceralFatLevelRef}
             id="visceralFatLevel"
             name="visceralFatLevel"
-            type="number"
+            type="text"
+            inputMode="numeric"
+            pattern="\d"
             placeholder="○"
             onChange={handleChange}
             value={record.visceralFatLevel}
@@ -182,7 +188,9 @@ export const InputArea = () => {
             ref={bmiRef}
             id="bmi"
             name="bmi"
-            type="number"
+            type="text"
+            inputMode="numeric"
+            pattern="\d{2}\.\d"
             placeholder="○○,○"
             onChange={handleChange}
             value={record.bmi}
