@@ -145,7 +145,7 @@ export const InputArea = () => {
             type="text"
             inputMode="decimal"
             pattern="\d{2}\.\d"
-            placeholder="○○,○"
+            placeholder="○○.○"
             autoFocus={true}
             onChange={handleChange}
             value={record.weight}
@@ -161,7 +161,7 @@ export const InputArea = () => {
             type="text"
             inputMode="decimal"
             pattern="\d{2}\.\d"
-            placeholder="○○,○"
+            placeholder="○○.○"
             onChange={handleChange}
             value={record.fatPercent}
             maxLength={4}
@@ -191,7 +191,7 @@ export const InputArea = () => {
             type="text"
             inputMode="decimal"
             pattern="\d{2}\.\d"
-            placeholder="○○,○"
+            placeholder="○○.○"
             onChange={handleChange}
             value={record.bmi}
             maxLength={4}
