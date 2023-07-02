@@ -7,5 +7,12 @@ interface props {
 
 export const Button = (props: props) => {
   const { text, handleClick } = props;
-  return <button onClick={handleClick}>{text}</button>;
+  return (
+    <button
+      onClick={handleClick}
+      className="bg-gray-200 rounded hover:bg-gray-500 hover:text-white duration-200"
+    >
+      {text}
+    </button>
+  );
 };
