@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <div className={styles.container}>
         <header>
-          <h1>Health App!</h1>
+          <h1 className="text-xl p-2">Health App!</h1>
         </header>
         <main className={styles.main}>
           <InputArea />

@@ -134,6 +134,7 @@ export const InputArea = () => {
             type="date"
             onChange={handleChangeDate}
             value={record.date}
+            className="p-2"
           />
         </div>
         <div className={styles.inputItemWrapper}>
@@ -145,11 +146,12 @@ export const InputArea = () => {
             type="text"
             inputMode="decimal"
             pattern="\d{2}\.\d"
-            placeholder="○○,○"
+            placeholder="○○.○"
             autoFocus={true}
             onChange={handleChange}
             value={record.weight}
             maxLength={4}
+            className="p-2"
           />
         </div>
         <div className={styles.inputItemWrapper}>
@@ -161,10 +163,11 @@ export const InputArea = () => {
             type="text"
             inputMode="decimal"
             pattern="\d{2}\.\d"
-            placeholder="○○,○"
+            placeholder="○○.○"
             onChange={handleChange}
             value={record.fatPercent}
             maxLength={4}
+            className="p-2"
           />
         </div>
         <div className={styles.inputItemWrapper}>
@@ -180,6 +183,7 @@ export const InputArea = () => {
             onChange={handleChange}
             value={record.visceralFatLevel}
             maxLength={1}
+            className="p-2"
           />
         </div>
         <div className={styles.inputItemWrapper}>
@@ -191,10 +195,11 @@ export const InputArea = () => {
             type="text"
             inputMode="decimal"
             pattern="\d{2}\.\d"
-            placeholder="○○,○"
+            placeholder="○○.○"
             onChange={handleChange}
             value={record.bmi}
             maxLength={4}
+            className="p-2"
           />
         </div>
       </div>
