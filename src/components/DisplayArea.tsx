@@ -2,6 +2,8 @@ import {
   DocumentData,
   Firestore,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   getFirestore,
 } from "firebase/firestore";
@@ -17,9 +19,20 @@ export const DisPlayArea = () => {
   useEffect(() => {
     async function getData(db: Firestore) {
       const querySnapshot = await getDocs(collection(db, "health-data"));
-      const dataList = querySnapshot.docs.map((doc) => doc.data());
+      const dataList = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          date: data.date,
+          weight: data.weight,
+          fatPercent: data.fatPercent,
+          visceralFatLevel: data.visceralFatLevel,
+          bmi: data.bmi,
+        };
+      });
       setFirebaseData(dataList);
     }
+
     getData(db);
   }, []);
 
@@ -33,6 +46,11 @@ export const DisPlayArea = () => {
       return -1;
     }
   });
+  const onClickDelete = async (e: string) => {
+    alert("本当に削除しますか？");
+    await deleteDoc(doc(db, "health-data", e));
+    window.location.reload();
+  };
 
   return (
     <div className={styles.displayArea}>
@@ -55,6 +73,14 @@ export const DisPlayArea = () => {
                 <td>{d.fatPercent}</td>
                 <td>{d.visceralFatLevel}</td>
                 <td>{d.bmi}</td>
+                <td className="bg-red-600">
+                  <button
+                    onClick={() => onClickDelete(d.id)}
+                    className="text-white"
+                  >
+                    削除
+                  </button>
+                </td>
               </tr>
             );
           })}
