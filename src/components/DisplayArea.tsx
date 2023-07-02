@@ -47,9 +47,11 @@ export const DisPlayArea = () => {
     }
   });
   const onClickDelete = async (e: string) => {
-    alert("本当に削除しますか？");
-    await deleteDoc(doc(db, "health-data", e));
-    window.location.reload();
+    const confirm: boolean = window.confirm("本当に削除しますか？");
+    if (confirm) {
+      await deleteDoc(doc(db, "health-data", e));
+      window.location.reload();
+    }
   };
 
   return (
