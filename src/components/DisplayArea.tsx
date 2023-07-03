@@ -10,6 +10,9 @@ import {
 import { app } from "../firebase/firebase";
 import { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
+import { RiDeleteBinLine } from "react-icons/Ri";
+import { IconContext } from "react-icons";
+
 const db = getFirestore(app);
 
 export const DisPlayArea = () => {
@@ -80,7 +83,9 @@ export const DisPlayArea = () => {
                     onClick={() => onClickDelete(d.id)}
                     className="text-white"
                   >
-                    削除
+                    <IconContext.Provider value={{ size: "20px" }}>
+                      <RiDeleteBinLine />
+                    </IconContext.Provider>
                   </button>
                 </td>
               </tr>
