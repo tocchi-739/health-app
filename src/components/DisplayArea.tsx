@@ -10,7 +10,7 @@ import {
 import { app } from "../firebase/firebase";
 import { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
-import { RiDeleteBinLine } from "react-icons/Ri";
+import { RiDeleteBinLine } from "react-icons/ri";
 import { IconContext } from "react-icons";
 
 const db = getFirestore(app);
