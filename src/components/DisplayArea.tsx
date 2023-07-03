@@ -59,14 +59,15 @@ export const DisPlayArea = () => {
 
   return (
     <div className={styles.displayArea}>
-      <table>
-        <thead>
+      <table className="border border-white text-cyan-900">
+        <thead className="bg-cyan-900 text-white">
           <tr>
             <th>日付</th>
             <th>体重</th>
             <th>体脂肪率</th>
             <th>内臓脂肪レベル</th>
             <th>BMI</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -78,12 +79,14 @@ export const DisPlayArea = () => {
                 <td>{d.fatPercent}</td>
                 <td>{d.visceralFatLevel}</td>
                 <td>{d.bmi}</td>
-                <td className="bg-red-600">
+                <td>
                   <button
                     onClick={() => onClickDelete(d.id)}
                     className="text-white"
                   >
-                    <IconContext.Provider value={{ size: "20px" }}>
+                    <IconContext.Provider
+                      value={{ size: "20px", color: "#ef4444" }}
+                    >
                       <RiDeleteBinLine />
                     </IconContext.Provider>
                   </button>
