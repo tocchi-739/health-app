@@ -123,6 +123,7 @@ export const InputArea = () => {
       visceralFatLevel: "",
       bmi: "",
     });
+    window.location.reload();
     toast.success("登録しました!");
   };
   return (
@@ -135,7 +136,7 @@ export const InputArea = () => {
             type="date"
             onChange={handleChangeDate}
             value={record.date}
-            className="p-2"
+            className="p-2 bg-transparent"
           />
         </div>
         <div className={styles.inputItemWrapper}>
