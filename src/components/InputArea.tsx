@@ -3,6 +3,7 @@ import styles from "../../styles/Home.module.css";
 import { Button } from "./Button";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { app } from "../firebase/firebase";
+import { toast } from "react-hot-toast";
 
 const db = getFirestore(app);
 
@@ -72,10 +73,10 @@ export const InputArea = () => {
     // 文字数がオーバーしている場合にアラート
     // 最大文字数が入力されいてるinputエリアを再度選択して、入力することを防ぐためのもの
     if (target.name === "visceralFatLevel" && target.value.length > 1) {
-      alert("文字数オーバーです");
+      toast.error("文字数オーバーです");
       return;
     } else if (target.name !== "visceralFatLevel" && target.value.length > 4) {
-      alert("文字数オーバーです");
+      toast.error("文字数オーバーです");
       return;
     } else {
       setRecord((prev) => ({
@@ -94,18 +95,18 @@ export const InputArea = () => {
       record.visceralFatLevel === "" ||
       record.bmi === ""
     ) {
-      alert("未入力の箇所があります");
+      toast.error("未入力の箇所があります");
       return;
     }
     const regex = /\d{2}\.\d/;
     if (!regex.test(record.weight)) {
-      alert("体重の入力に誤りがあります");
+      toast.error("体重の入力に誤りがあります");
       return;
     } else if (!regex.test(record.fatPercent)) {
-      alert("体脂肪率の入力に誤りがあります");
+      toast.error("体脂肪率の入力に誤りがあります");
       return;
     } else if (!regex.test(record.bmi)) {
-      alert("BMIの入力に誤りがあります");
+      toast.error("BMIの入力に誤りがあります");
       return;
     }
     const docRef = await addDoc(collection(db, "health-data"), {
@@ -122,7 +123,7 @@ export const InputArea = () => {
       visceralFatLevel: "",
       bmi: "",
     });
-    window.location.reload();
+    toast.success("登録しました!");
   };
   return (
     <>

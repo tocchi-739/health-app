@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IconContext } from "react-icons";
+import { toast } from "react-hot-toast";
 
 const db = getFirestore(app);
 
@@ -19,6 +20,13 @@ export const DisPlayArea = () => {
   // const { data } = props;
   const [firebaseData, setFirebaseData] = useState<DocumentData>();
 
+  const onClickDelete = async (e: string) => {
+    const confirm: boolean = window.confirm("本当に削除しますか？");
+    if (confirm) {
+      await deleteDoc(doc(db, "health-data", e));
+    }
+    toast.success("削除しました!");
+  };
   useEffect(() => {
     async function getData(db: Firestore) {
       const querySnapshot = await getDocs(collection(db, "health-data"));
@@ -37,7 +45,7 @@ export const DisPlayArea = () => {
     }
 
     getData(db);
-  }, []);
+  }, [onClickDelete]);
 
   const sortedList = firebaseData?.sort(function (
     a: DocumentData,
@@ -49,13 +57,6 @@ export const DisPlayArea = () => {
       return -1;
     }
   });
-  const onClickDelete = async (e: string) => {
-    const confirm: boolean = window.confirm("本当に削除しますか？");
-    if (confirm) {
-      await deleteDoc(doc(db, "health-data", e));
-      window.location.reload();
-    }
-  };
 
   return (
     <div className={styles.displayArea}>
