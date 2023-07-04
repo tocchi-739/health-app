@@ -3,6 +3,7 @@ import Head from "next/head";
 import styles from "../../styles/Home.module.css";
 import { InputArea } from "../components/InputArea";
 import { DisPlayArea } from "../components/DisplayArea";
+import { Toaster } from "react-hot-toast";
 
 const Home: NextPage = () => {
   return (
@@ -22,6 +23,7 @@ const Home: NextPage = () => {
         </main>
         <footer></footer>
       </div>
+      <Toaster />
     </>
   );
 };

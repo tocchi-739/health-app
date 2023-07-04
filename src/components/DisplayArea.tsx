@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IconContext } from "react-icons";
+import { toast } from "react-hot-toast";
 
 const db = getFirestore(app);
 
@@ -55,6 +56,7 @@ export const DisPlayArea = () => {
       await deleteDoc(doc(db, "health-data", e));
       window.location.reload();
     }
+    await toast.success("削除しました!");
   };
 
   return (
