@@ -14,6 +14,8 @@ import styles from "../../styles/Home.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IconContext } from "react-icons";
 import { toast } from "react-hot-toast";
+import "chart.js/auto";
+import { Line } from "react-chartjs-2";
 
 const db = getFirestore(app);
 
@@ -64,6 +66,94 @@ export const DisPlayArea = () => {
     await toast.success("削除しました!");
   };
 
+  // グラフ化ここから
+  const dateArray = sortedList?.map(
+    (obj: {
+      id: string;
+      date: string;
+      weight: string;
+      fatPercent: string;
+      visceralFatLevel: string;
+      bmi: string;
+    }) => obj.date
+  );
+  console.log(dateArray);
+  const weightArray = sortedList?.map(
+    (obj: {
+      id: string;
+      date: string;
+      weight: string;
+      fatPercent: string;
+      visceralFatLevel: string;
+      bmi: string;
+    }) => obj.weight
+  );
+  const fatPercentArray = sortedList?.map(
+    (obj: {
+      id: string;
+      date: string;
+      weight: string;
+      fatPercent: string;
+      visceralFatLevel: string;
+      bmi: string;
+    }) => obj.fatPercent
+  );
+  const visceralFatLevelArray = sortedList?.map(
+    (obj: {
+      id: string;
+      date: string;
+      weight: string;
+      fatPercent: string;
+      visceralFatLevel: string;
+      bmi: string;
+    }) => obj.visceralFatLevel
+  );
+  const bmiArray = sortedList?.map(
+    (obj: {
+      id: string;
+      date: string;
+      weight: string;
+      fatPercent: string;
+      visceralFatLevel: string;
+      bmi: string;
+    }) => obj.bmi
+  );
+  const weightGraphData = {
+    labels: dateArray,
+    datasets: [
+      {
+        label: "体重",
+        data: weightArray,
+        borderColor: "rgb(75, 192, 192)",
+      },
+    ],
+  };
+  const visceralFatLevelGraphData = {
+    labels: dateArray,
+    datasets: [
+      {
+        label: "内臓脂肪レベル",
+        data: visceralFatLevelArray,
+        borderColor: "rgb(75, 100, 192)",
+      },
+    ],
+  };
+  const otherGraphData = {
+    labels: dateArray,
+    datasets: [
+      {
+        label: "体脂肪率",
+        data: fatPercentArray,
+        borderColor: "rgb(192, 192, 75)",
+      },
+      {
+        label: "BMI",
+        data: bmiArray,
+        borderColor: "rgb(192, 75, 100)",
+      },
+    ],
+  };
+
   return (
     <div className={styles.displayArea}>
       <table className="border border-white text-cyan-900">
@@ -103,6 +193,9 @@ export const DisPlayArea = () => {
           })}
         </tbody>
       </table>
+      <Line data={weightGraphData} />
+      <Line data={visceralFatLevelGraphData} />
+      <Line data={otherGraphData} />
     </div>
   );
 };
