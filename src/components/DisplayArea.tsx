@@ -6,6 +6,7 @@ import {
   doc,
   getDocs,
   getFirestore,
+  onSnapshot,
 } from "firebase/firestore";
 import { app } from "../firebase/firebase";
 import { useEffect, useState } from "react";
@@ -18,26 +19,31 @@ const db = getFirestore(app);
 
 export const DisPlayArea = () => {
   // const { data } = props;
+
   const [firebaseData, setFirebaseData] = useState<DocumentData>();
 
   useEffect(() => {
-    async function getData(db: Firestore) {
-      const querySnapshot = await getDocs(collection(db, "health-data"));
-      const dataList = querySnapshot.docs.map((doc) => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          date: data.date,
-          weight: data.weight,
-          fatPercent: data.fatPercent,
-          visceralFatLevel: data.visceralFatLevel,
-          bmi: data.bmi,
-        };
-      });
-      setFirebaseData(dataList);
-    }
+    // Firestoreのデータ監視を設定
+    const unsubscribe = onSnapshot(
+      collection(db, "health-data"),
+      (snapshot) => {
+        const dataList = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            date: data.date,
+            weight: data.weight,
+            fatPercent: data.fatPercent,
+            visceralFatLevel: data.visceralFatLevel,
+            bmi: data.bmi,
+          };
+        });
+        setFirebaseData(dataList);
+      }
+    );
 
-    getData(db);
+    // コンポーネントのアンマウント時にデータ監視を停止
+    return () => unsubscribe();
   }, []);
 
   const sortedList = firebaseData?.sort(function (
@@ -54,7 +60,6 @@ export const DisPlayArea = () => {
     const confirm: boolean = window.confirm("本当に削除しますか？");
     if (confirm) {
       await deleteDoc(doc(db, "health-data", e));
-      window.location.reload();
     }
     await toast.success("削除しました!");
   };

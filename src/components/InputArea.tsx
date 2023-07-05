@@ -123,7 +123,6 @@ export const InputArea = () => {
       visceralFatLevel: "",
       bmi: "",
     });
-    window.location.reload();
     toast.success("登録しました!");
   };
   return (
