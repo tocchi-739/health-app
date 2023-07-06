@@ -4,8 +4,11 @@ import styles from "../../styles/Home.module.css";
 import { InputArea } from "../components/InputArea";
 import { DisPlayArea } from "../components/DisplayArea";
 import { Toaster } from "react-hot-toast";
+import { GraphArea } from "../components/GraphArea";
+import { useState } from "react";
 
 const Home: NextPage = () => {
+  const [displayChangeFlag, setDisplayChangeFlag] = useState(true);
   return (
     <>
       <Head>
@@ -19,7 +22,29 @@ const Home: NextPage = () => {
         </header>
         <main className={styles.main}>
           <InputArea />
-          <DisPlayArea />
+          <div className="flex mt-6 bg-cyan-900 text-white">
+            <button
+              className="border-white border"
+              onClick={() =>
+                displayChangeFlag
+                  ? displayChangeFlag
+                  : setDisplayChangeFlag(!displayChangeFlag)
+              }
+            >
+              一覧
+            </button>
+            <button
+              className="border-white border"
+              onClick={() =>
+                displayChangeFlag
+                  ? setDisplayChangeFlag(!displayChangeFlag)
+                  : displayChangeFlag
+              }
+            >
+              グラフ
+            </button>
+          </div>
+          {displayChangeFlag ? <DisPlayArea /> : <GraphArea />}
         </main>
         <footer></footer>
       </div>
