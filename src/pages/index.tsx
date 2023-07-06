@@ -4,6 +4,7 @@ import styles from "../../styles/Home.module.css";
 import { InputArea } from "../components/InputArea";
 import { DisPlayArea } from "../components/DisplayArea";
 import { Toaster } from "react-hot-toast";
+import { GraphArea } from "../components/GraphArea";
 
 const Home: NextPage = () => {
   return (
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
         <main className={styles.main}>
           <InputArea />
           <DisPlayArea />
+          <GraphArea />
         </main>
         <footer></footer>
       </div>
