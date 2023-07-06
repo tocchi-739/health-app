@@ -48,7 +48,7 @@ export const DisPlayArea = () => {
     return () => unsubscribe();
   }, []);
 
-  const sortedList = firebaseData?.sort(function (
+  const sortedAscList = firebaseData?.sort(function (
     a: DocumentData,
     b: DocumentData
   ) {
@@ -56,6 +56,16 @@ export const DisPlayArea = () => {
       return 1;
     } else {
       return -1;
+    }
+  });
+  const sortedDescList = firebaseData?.sort(function (
+    a: DocumentData,
+    b: DocumentData
+  ) {
+    if (a.date < b.date) {
+      return -1;
+    } else {
+      return 1;
     }
   });
   const onClickDelete = async (e: string) => {
@@ -67,7 +77,7 @@ export const DisPlayArea = () => {
   };
 
   // グラフ化ここから
-  const dateArray = sortedList?.map(
+  const dateArray = sortedDescList?.map(
     (obj: {
       id: string;
       date: string;
@@ -75,10 +85,9 @@ export const DisPlayArea = () => {
       fatPercent: string;
       visceralFatLevel: string;
       bmi: string;
-    }) => obj.date
+    }) => obj.date.substring(5).replace("-", "/")
   );
-  console.log(dateArray);
-  const weightArray = sortedList?.map(
+  const weightArray = sortedDescList?.map(
     (obj: {
       id: string;
       date: string;
@@ -88,7 +97,7 @@ export const DisPlayArea = () => {
       bmi: string;
     }) => obj.weight
   );
-  const fatPercentArray = sortedList?.map(
+  const fatPercentArray = sortedDescList?.map(
     (obj: {
       id: string;
       date: string;
@@ -98,7 +107,7 @@ export const DisPlayArea = () => {
       bmi: string;
     }) => obj.fatPercent
   );
-  const visceralFatLevelArray = sortedList?.map(
+  const visceralFatLevelArray = sortedDescList?.map(
     (obj: {
       id: string;
       date: string;
@@ -108,7 +117,7 @@ export const DisPlayArea = () => {
       bmi: string;
     }) => obj.visceralFatLevel
   );
-  const bmiArray = sortedList?.map(
+  const bmiArray = sortedDescList?.map(
     (obj: {
       id: string;
       date: string;
@@ -168,7 +177,7 @@ export const DisPlayArea = () => {
           </tr>
         </thead>
         <tbody>
-          {sortedList?.map((d: DocumentData, index: string) => {
+          {sortedAscList?.map((d: DocumentData, index: string) => {
             return (
               <tr key={index}>
                 <td>{d.date.substring(5).replace("-", "/")}</td>
