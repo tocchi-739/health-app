@@ -1,50 +1,16 @@
-import {
-  DocumentData,
-  Firestore,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  getFirestore,
-  onSnapshot,
-} from "firebase/firestore";
-import { app } from "../firebase/firebase";
-import { useEffect, useState } from "react";
+import { DocumentData, Firestore, deleteDoc, doc } from "firebase/firestore";
 import styles from "../../styles/Home.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IconContext } from "react-icons";
 import { toast } from "react-hot-toast";
 
-const db = getFirestore(app);
+interface props {
+  db: Firestore;
+  firebaseData: DocumentData | undefined;
+}
 
-export const DisPlayArea = () => {
-  // const { data } = props;
-
-  const [firebaseData, setFirebaseData] = useState<DocumentData>();
-
-  useEffect(() => {
-    // Firestoreのデータ監視を設定
-    const unsubscribe = onSnapshot(
-      collection(db, "health-data"),
-      (snapshot) => {
-        const dataList = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            date: data.date,
-            weight: data.weight,
-            fatPercent: data.fatPercent,
-            visceralFatLevel: data.visceralFatLevel,
-            bmi: data.bmi,
-          };
-        });
-        setFirebaseData(dataList);
-      }
-    );
-
-    // コンポーネントのアンマウント時にデータ監視を停止
-    return () => unsubscribe();
-  }, []);
+export const DisPlayArea = (props: props) => {
+  const { db, firebaseData } = props;
 
   const sortedAscList = firebaseData?.sort(function (
     a: DocumentData,

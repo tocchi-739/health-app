@@ -5,10 +5,44 @@ import { InputArea } from "../components/InputArea";
 import { DisPlayArea } from "../components/DisplayArea";
 import { Toaster } from "react-hot-toast";
 import { GraphArea } from "../components/GraphArea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  DocumentData,
+  collection,
+  getFirestore,
+  onSnapshot,
+} from "firebase/firestore";
+import { app } from "../firebase/firebase";
 
+const db = getFirestore(app);
 const Home: NextPage = () => {
   const [displayChangeFlag, setDisplayChangeFlag] = useState(true);
+
+  const [firebaseData, setFirebaseData] = useState<DocumentData>();
+
+  useEffect(() => {
+    // Firestoreのデータ監視を設定
+    const unsubscribe = onSnapshot(
+      collection(db, "health-data"),
+      (snapshot) => {
+        const dataList = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            date: data.date,
+            weight: data.weight,
+            fatPercent: data.fatPercent,
+            visceralFatLevel: data.visceralFatLevel,
+            bmi: data.bmi,
+          };
+        });
+        setFirebaseData(dataList);
+      }
+    );
+
+    // コンポーネントのアンマウント時にデータ監視を停止
+    return () => unsubscribe();
+  }, []);
   return (
     <>
       <Head>
@@ -44,7 +78,11 @@ const Home: NextPage = () => {
               グラフ
             </button>
           </div>
-          {displayChangeFlag ? <DisPlayArea /> : <GraphArea />}
+          {displayChangeFlag ? (
+            <DisPlayArea db={db} firebaseData={firebaseData} />
+          ) : (
+            <GraphArea firebaseData={firebaseData} />
+          )}
         </main>
         <footer></footer>
       </div>
