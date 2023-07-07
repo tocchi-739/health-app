@@ -56,9 +56,9 @@ const Home: NextPage = () => {
         </header>
         <main className={styles.main}>
           <InputArea />
-          <div className="flex mt-6 bg-cyan-900 text-white">
+          <div className="border flex mt-6 bg-cyan-900 text-white border-cyan-900">
             <button
-              className="border-white border"
+              className={displayChangeFlag ? "" : " bg-white text-cyan-900"}
               onClick={() =>
                 displayChangeFlag
                   ? displayChangeFlag
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
               一覧
             </button>
             <button
-              className="border-white border"
+              className={displayChangeFlag ? "bg-white text-cyan-900" : ""}
               onClick={() =>
                 displayChangeFlag
                   ? setDisplayChangeFlag(!displayChangeFlag)
