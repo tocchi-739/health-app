@@ -1,45 +1,13 @@
-import {
-  DocumentData,
-  collection,
-  getFirestore,
-  onSnapshot,
-} from "firebase/firestore";
-import { app } from "../firebase/firebase";
-import { useEffect, useState } from "react";
+import { DocumentData } from "firebase/firestore";
 import "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
-const db = getFirestore(app);
+interface props {
+  firebaseData: DocumentData | undefined;
+}
 
-export const GraphArea = () => {
-  // const { data } = props;
-
-  const [firebaseData, setFirebaseData] = useState<DocumentData>();
-
-  useEffect(() => {
-    // Firestoreのデータ監視を設定
-    const unsubscribe = onSnapshot(
-      collection(db, "health-data"),
-      (snapshot) => {
-        const dataList = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            date: data.date,
-            weight: data.weight,
-            fatPercent: data.fatPercent,
-            visceralFatLevel: data.visceralFatLevel,
-            bmi: data.bmi,
-          };
-        });
-        setFirebaseData(dataList);
-      }
-    );
-
-    // コンポーネントのアンマウント時にデータ監視を停止
-    return () => unsubscribe();
-  }, []);
-
+export const GraphArea = (props: props) => {
+  const { firebaseData } = props;
   const sortedDescList = firebaseData?.sort(function (
     a: DocumentData,
     b: DocumentData
