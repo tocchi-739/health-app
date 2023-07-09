@@ -1,5 +1,4 @@
 import { DocumentData, Firestore, deleteDoc, doc } from "firebase/firestore";
-import styles from "../../styles/Home.module.css";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IconContext } from "react-icons";
 import { toast } from "react-hot-toast";
@@ -31,7 +30,7 @@ export const DisPlayArea = (props: props) => {
   };
 
   return (
-    <div className={styles.displayArea}>
+    <div>
       <table className="border border-white text-cyan-900">
         <thead className="bg-cyan-900 text-white">
           <tr>

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../../styles/Home.module.css";
 import { Button } from "./Button";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { app } from "../firebase/firebase";
@@ -127,19 +126,21 @@ export const InputArea = () => {
   };
   return (
     <>
-      <div className={styles.inputArea}>
-        <div className={styles.inputItemWrapper}>
-          <label>日付</label>
+      <div className="flex flex-col gap-4 my-8 md:flex-row">
+        <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
+          <label className="w-36 md:w-auto">日付</label>
           <input
             name="date"
             type="date"
             onChange={handleChangeDate}
             value={record.date}
-            className="p-2 bg-transparent"
+            className="p-2 bg-transparent border border-cyan-900 rounded-md w-48"
           />
         </div>
-        <div className={styles.inputItemWrapper}>
-          <label htmlFor="weight">体重</label>
+        <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
+          <label htmlFor="weight" className="w-36 md:w-auto">
+            体重
+          </label>
           <input
             ref={weightRef}
             id="weight"
@@ -152,11 +153,13 @@ export const InputArea = () => {
             onChange={handleChange}
             value={record.weight}
             maxLength={4}
-            className="p-2"
+            className="p-2 border border-cyan-900 rounded-md w-48"
           />
         </div>
-        <div className={styles.inputItemWrapper}>
-          <label htmlFor="fatPercent">体脂肪率</label>
+        <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
+          <label htmlFor="fatPercent" className="w-36 md:w-auto">
+            体脂肪率
+          </label>
           <input
             ref={fatPercentRef}
             id="fatPercent"
@@ -168,11 +171,13 @@ export const InputArea = () => {
             onChange={handleChange}
             value={record.fatPercent}
             maxLength={4}
-            className="p-2"
+            className="p-2 border border-cyan-900 rounded-md w-48"
           />
         </div>
-        <div className={styles.inputItemWrapper}>
-          <label htmlFor="visceralFatLevel">内臓脂肪レベル</label>
+        <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
+          <label htmlFor="visceralFatLevel" className="w-36 md:w-auto">
+            内臓脂肪レベル
+          </label>
           <input
             ref={visceralFatLevelRef}
             id="visceralFatLevel"
@@ -184,11 +189,13 @@ export const InputArea = () => {
             onChange={handleChange}
             value={record.visceralFatLevel}
             maxLength={1}
-            className="p-2"
+            className="p-2 border border-cyan-900 rounded-md w-48"
           />
         </div>
-        <div className={styles.inputItemWrapper}>
-          <label htmlFor="bmi">BMI</label>
+        <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
+          <label htmlFor="bmi" className="w-36 md:w-auto">
+            BMI
+          </label>
           <input
             ref={bmiRef}
             id="bmi"
@@ -200,7 +207,7 @@ export const InputArea = () => {
             onChange={handleChange}
             value={record.bmi}
             maxLength={4}
-            className="p-2"
+            className="p-2 border border-cyan-900 rounded-md w-48"
           />
         </div>
       </div>
