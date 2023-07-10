@@ -126,9 +126,9 @@ export const InputArea = () => {
   };
   return (
     <>
-      <div className="flex flex-col gap-4 my-8 md:flex-row">
+      <div className="flex flex-col gap-4 my-8 md:flex-row md:flex-wrap">
         <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
-          <label className="w-36 md:w-auto">日付</label>
+          <label className="md:w-auto">日付</label>
           <input
             name="date"
             type="date"
@@ -138,7 +138,7 @@ export const InputArea = () => {
           />
         </div>
         <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
-          <label htmlFor="weight" className="w-36 md:w-auto">
+          <label htmlFor="weight" className="md:w-auto">
             体重
           </label>
           <input
@@ -157,7 +157,7 @@ export const InputArea = () => {
           />
         </div>
         <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
-          <label htmlFor="fatPercent" className="w-36 md:w-auto">
+          <label htmlFor="fatPercent" className="md:w-auto">
             体脂肪率
           </label>
           <input
@@ -175,7 +175,7 @@ export const InputArea = () => {
           />
         </div>
         <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
-          <label htmlFor="visceralFatLevel" className="w-36 md:w-auto">
+          <label htmlFor="visceralFatLevel" className="md:w-auto">
             内臓脂肪レベル
           </label>
           <input
@@ -193,7 +193,7 @@ export const InputArea = () => {
           />
         </div>
         <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
-          <label htmlFor="bmi" className="w-36 md:w-auto">
+          <label htmlFor="bmi" className="md:w-auto">
             BMI
           </label>
           <input

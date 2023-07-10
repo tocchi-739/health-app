@@ -31,7 +31,7 @@ export const DisPlayArea = (props: props) => {
 
   return (
     <div>
-      <table className="border border-white text-cyan-900">
+      <table className="border border-white text-cyan-900 mx-auto">
         <thead className="bg-cyan-900 text-white">
           <tr>
             <th>日付</th>
