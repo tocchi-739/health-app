@@ -43,7 +43,7 @@ export const DisPlayArea = (props: props) => {
           </tr>
         </thead>
         <tbody>
-          {sortedAscList?.map((d: DocumentData, index: string) => {
+          {sortedAscList?.slice(0, 14).map((d: DocumentData, index: string) => {
             return (
               <tr key={index}>
                 <td>{d.date.substring(5).replace("-", "/")}</td>
