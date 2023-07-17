@@ -12,6 +12,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { app } from "../firebase/firebase";
+import { CreateUser } from "../components/createUser";
 
 const db = getFirestore(app);
 const Home: NextPage = () => {
@@ -54,6 +55,7 @@ const Home: NextPage = () => {
           <h1 className="text-xl pt-8 text-cyan-900 font-bold">Health App!</h1>
         </header>
         <main className="flex-1">
+          <CreateUser />
           <InputArea />
           <div className="border flex bg-cyan-900 text-white border-cyan-900 md:hidden">
             <button
