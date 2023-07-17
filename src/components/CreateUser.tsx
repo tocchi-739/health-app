@@ -9,7 +9,6 @@ export const CreateUser = () => {
   });
 
   const auth = getAuth();
-  console.log(auth.currentUser?.uid);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target;

@@ -15,6 +15,7 @@ import { app } from "../firebase/firebase";
 import { CreateUser } from "../components/createUser";
 import { Login } from "../components/Login";
 import { Logout } from "../components/Logout";
+import { Header } from "../components/Header";
 
 const db = getFirestore(app);
 const Home: NextPage = () => {
@@ -53,13 +54,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto px-4 flex flex-col">
-        <header>
-          <h1 className="text-xl pt-8 text-cyan-900 font-bold">Health App!</h1>
-        </header>
+        <Header />
         <main className="flex-1">
           <CreateUser />
           <Login />
-          <Logout />
           <InputArea />
           <div className="border flex bg-cyan-900 text-white border-cyan-900 md:hidden">
             <button
