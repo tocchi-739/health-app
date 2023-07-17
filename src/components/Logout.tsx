@@ -10,7 +10,7 @@ export const Logout = () => {
     signOut(auth)
       .then(() => {
         toast.success("ログアウトに成功しました");
-        router.replace(`/`);
+        router.push(`/`);
         // Sign-out successful.
       })
       .catch((error) => {
