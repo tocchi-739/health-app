@@ -15,15 +15,21 @@ import { app } from "../firebase/firebase";
 import { Header } from "../components/Header";
 import { TopPage } from "../components/TopPage";
 import { getAuth } from "firebase/auth";
-
-const db = getFirestore(app);
-const auth = getAuth();
-const user = auth.currentUser;
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
+  const db = getFirestore(app);
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const router = useRouter();
   const [displayChangeFlag, setDisplayChangeFlag] = useState(true);
 
   const [firebaseData, setFirebaseData] = useState<DocumentData>();
+
+  if (user) {
+    const uid = user.uid;
+    router.push(`/${uid}`);
+  }
 
   useEffect(() => {
     // Firestoreのデータ監視を設定

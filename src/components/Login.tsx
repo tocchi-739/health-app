@@ -32,7 +32,7 @@ export const Login = () => {
         const user = userCredential.user;
         if (user) {
           const uid = user.uid;
-          router.replace(`/${uid}`);
+          router.push(`/${uid}`);
         }
         toast.success("ログインに成功しました");
         // ...

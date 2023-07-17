@@ -33,7 +33,7 @@ export const CreateUser = () => {
 
         if (user) {
           const uid = user.uid;
-          router.replace(`/${uid}`);
+          router.push(`/${uid}`);
         }
         toast.success("ユーザー登録に成功しました");
 
