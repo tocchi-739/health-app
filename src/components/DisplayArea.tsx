@@ -2,6 +2,7 @@ import { DocumentData, Firestore, deleteDoc, doc } from "firebase/firestore";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { IconContext } from "react-icons";
 import { toast } from "react-hot-toast";
+import { getAuth } from "firebase/auth";
 
 interface props {
   db: Firestore;
@@ -11,6 +12,9 @@ interface props {
 export const DisPlayArea = (props: props) => {
   const { db, firebaseData } = props;
 
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const uid = user?.uid;
   const sortedAscList = firebaseData?.sort(function (
     a: DocumentData,
     b: DocumentData
@@ -22,11 +26,13 @@ export const DisPlayArea = (props: props) => {
     }
   });
   const onClickDelete = async (e: string) => {
-    const confirm: boolean = window.confirm("本当に削除しますか？");
-    if (confirm) {
-      await deleteDoc(doc(db, "health-data", e));
+    if (uid) {
+      const confirm: boolean = window.confirm("本当に削除しますか？");
+      if (confirm) {
+        await deleteDoc(doc(db, "health-data", uid, "daily", e));
+      }
+      await toast.success("削除しました!");
     }
-    await toast.success("削除しました!");
   };
 
   return (
