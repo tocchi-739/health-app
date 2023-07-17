@@ -1,16 +1,15 @@
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Button } from "./Button";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 
 export const Login = () => {
   const [loginUserData, setLoginUserData] = useState({
     email: "",
     password: "",
   });
+  const router = useRouter();
 
   const auth = getAuth();
 
@@ -31,14 +30,17 @@ export const Login = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        alert("ログインに成功しました！");
-
+        if (user) {
+          const uid = user.uid;
+          router.replace(`/${uid}`);
+        }
+        toast.success("ログインに成功しました");
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage);
+        toast.error("ログインに失敗しました" + errorMessage);
       });
     setLoginUserData({
       email: "",

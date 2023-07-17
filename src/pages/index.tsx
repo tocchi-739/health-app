@@ -12,12 +12,14 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { app } from "../firebase/firebase";
-import { CreateUser } from "../components/createUser";
-import { Login } from "../components/Login";
-import { Logout } from "../components/Logout";
 import { Header } from "../components/Header";
+import { TopPage } from "../components/TopPage";
+import { getAuth } from "firebase/auth";
 
 const db = getFirestore(app);
+const auth = getAuth();
+const user = auth.currentUser;
+
 const Home: NextPage = () => {
   const [displayChangeFlag, setDisplayChangeFlag] = useState(true);
 
@@ -56,42 +58,46 @@ const Home: NextPage = () => {
       <div className="container mx-auto px-4 flex flex-col">
         <Header />
         <main className="flex-1">
-          <CreateUser />
-          <Login />
-          <InputArea />
-          <div className="border flex bg-cyan-900 text-white border-cyan-900 md:hidden">
-            <button
-              className={displayChangeFlag ? "" : " bg-white text-cyan-900"}
-              onClick={() =>
-                displayChangeFlag
-                  ? displayChangeFlag
-                  : setDisplayChangeFlag(!displayChangeFlag)
-              }
-            >
-              一覧
-            </button>
-            <button
-              className={displayChangeFlag ? "bg-white text-cyan-900" : ""}
-              onClick={() =>
-                displayChangeFlag
-                  ? setDisplayChangeFlag(!displayChangeFlag)
-                  : displayChangeFlag
-              }
-            >
-              グラフ
-            </button>
-          </div>
-          <div className="md:hidden">
-            {displayChangeFlag ? (
-              <DisPlayArea db={db} firebaseData={firebaseData} />
-            ) : (
-              <GraphArea firebaseData={firebaseData} />
-            )}
-          </div>
-          <div className="hidden md:flex md:gap-20">
-            <DisPlayArea db={db} firebaseData={firebaseData} />
-            <GraphArea firebaseData={firebaseData} />
-          </div>
+          {user ? (
+            <>
+              <InputArea />
+              <div className="border flex bg-cyan-900 text-white border-cyan-900 md:hidden">
+                <button
+                  className={displayChangeFlag ? "" : " bg-white text-cyan-900"}
+                  onClick={() =>
+                    displayChangeFlag
+                      ? displayChangeFlag
+                      : setDisplayChangeFlag(!displayChangeFlag)
+                  }
+                >
+                  一覧
+                </button>
+                <button
+                  className={displayChangeFlag ? "bg-white text-cyan-900" : ""}
+                  onClick={() =>
+                    displayChangeFlag
+                      ? setDisplayChangeFlag(!displayChangeFlag)
+                      : displayChangeFlag
+                  }
+                >
+                  グラフ
+                </button>
+              </div>
+              <div className="md:hidden">
+                {displayChangeFlag ? (
+                  <DisPlayArea db={db} firebaseData={firebaseData} />
+                ) : (
+                  <GraphArea firebaseData={firebaseData} />
+                )}
+              </div>
+              <div className="hidden md:flex md:gap-20">
+                <DisPlayArea db={db} firebaseData={firebaseData} />
+                <GraphArea firebaseData={firebaseData} />
+              </div>
+            </>
+          ) : (
+            <TopPage />
+          )}
         </main>
         <footer></footer>
       </div>

@@ -1,16 +1,20 @@
 import { getAuth, signOut } from "firebase/auth";
 import { Button } from "./Button";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 
 export const Logout = () => {
+  const router = useRouter();
   const auth = getAuth();
   const handleClick = () => {
     signOut(auth)
       .then(() => {
-        alert("ログアウトに成功しました");
+        toast.success("ログアウトに成功しました");
+        router.replace(`/`);
         // Sign-out successful.
       })
       .catch((error) => {
-        alert("ログアウトに失敗しました");
+        toast.error("ログアウトに失敗しました");
         // An error happened.
       });
   };
