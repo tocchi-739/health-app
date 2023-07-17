@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 import { app } from "../firebase/firebase";
 import { CreateUser } from "../components/createUser";
+import { Login } from "../components/Login";
 
 const db = getFirestore(app);
 const Home: NextPage = () => {
@@ -56,6 +57,7 @@ const Home: NextPage = () => {
         </header>
         <main className="flex-1">
           <CreateUser />
+          <Login />
           <InputArea />
           <div className="border flex bg-cyan-900 text-white border-cyan-900 md:hidden">
             <button
