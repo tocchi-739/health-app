@@ -3,10 +3,14 @@ import { Button } from "./Button";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { app } from "../firebase/firebase";
 import { toast } from "react-hot-toast";
+import { getAuth } from "firebase/auth";
 
 const db = getFirestore(app);
 
 export const InputArea = () => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const uid = user?.uid;
   const [record, setRecord] = useState({
     date: "",
     weight: "",
@@ -108,13 +112,16 @@ export const InputArea = () => {
       toast.error("BMIの入力に誤りがあります");
       return;
     }
-    const docRef = await addDoc(collection(db, "health-data"), {
-      date: record.date,
-      weight: record.weight,
-      fatPercent: record.fatPercent,
-      visceralFatLevel: record.visceralFatLevel,
-      bmi: record.bmi,
-    });
+    if (uid) {
+      const collectionRef = collection(db, "health-data", uid, "daily");
+      const docRef = await addDoc(collectionRef, {
+        date: record.date,
+        weight: record.weight,
+        fatPercent: record.fatPercent,
+        visceralFatLevel: record.visceralFatLevel,
+        bmi: record.bmi,
+      });
+    }
     setRecord({
       date: "",
       weight: "",

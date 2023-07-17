@@ -17,6 +17,7 @@ import { getAuth } from "firebase/auth";
 const db = getFirestore(app);
 const auth = getAuth();
 const user = auth.currentUser;
+const uid = user?.uid;
 
 const IndividualPage = () => {
   const [displayChangeFlag, setDisplayChangeFlag] = useState(true);
@@ -25,27 +26,29 @@ const IndividualPage = () => {
 
   useEffect(() => {
     // Firestoreのデータ監視を設定
-    const unsubscribe = onSnapshot(
-      collection(db, "health-data"),
-      (snapshot) => {
-        const dataList = snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            date: data.date,
-            weight: data.weight,
-            fatPercent: data.fatPercent,
-            visceralFatLevel: data.visceralFatLevel,
-            bmi: data.bmi,
-          };
-        });
-        setFirebaseData(dataList);
-      }
-    );
+    if (uid) {
+      const unsubscribe = onSnapshot(
+        collection(db, "health-data", uid, "daily"),
+        (snapshot) => {
+          const dataList = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            return {
+              id: doc.id,
+              date: data.date,
+              weight: data.weight,
+              fatPercent: data.fatPercent,
+              visceralFatLevel: data.visceralFatLevel,
+              bmi: data.bmi,
+            };
+          });
+          setFirebaseData(dataList);
+        }
+      );
+      return () => unsubscribe();
+    }
 
     // コンポーネントのアンマウント時にデータ監視を停止
-    return () => unsubscribe();
-  }, []);
+  }, [uid]);
   return (
     <>
       <Head>
