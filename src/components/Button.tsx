@@ -8,7 +8,7 @@ export const Button = (props: props) => {
   return (
     <button
       onClick={handleClick}
-      className="bg-cyan-900 text-white rounded hover:bg-white hover:border hover:border-cyan-900 hover:text-cyan-900 duration-200"
+      className="bg-cyan-900 text-white rounded hover:bg-white hover:border hover:border-cyan-900 hover:text-cyan-900 duration-200 md:w-48"
     >
       {text}
     </button>
