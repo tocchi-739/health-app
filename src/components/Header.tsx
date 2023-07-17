@@ -6,12 +6,12 @@ export const Header = () => {
   const user = auth.currentUser;
   const email = user?.email;
   return (
-    <header className="flex py-8 items-center justify-between">
+    <header className="flex py-8 items-center md:justify-between flex-col md:flex-row">
       <h1 className="text-xl text-cyan-900 font-bold">Health App!</h1>
       {user ? (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 mt-4">
           <ul>
-            <li>メールアドレス:{email}</li>
+            <li>{email}</li>
           </ul>
           <Logout />
         </div>
