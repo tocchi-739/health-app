@@ -107,7 +107,7 @@ export const GraphArea = (props: props) => {
   };
 
   return (
-    <div>
+    <div className="md:w-6/12">
       <Line data={weightGraphData} />
       <Line data={visceralFatLevelGraphData} />
       <Line data={otherGraphData} />

@@ -125,7 +125,7 @@ export const InputArea = () => {
     toast.success("登録しました!");
   };
   return (
-    <>
+    <div className="mb-8">
       <div className="flex flex-col gap-4 my-8 md:flex-row md:flex-wrap">
         <div className="flex items-center justify-between text-cyan-900 md:flex-col md:items-start">
           <label className="md:w-auto">日付</label>
@@ -212,6 +212,6 @@ export const InputArea = () => {
         </div>
       </div>
       <Button text="登録" handleClick={handleClick} />
-    </>
+    </div>
   );
 };
