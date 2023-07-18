@@ -6,7 +6,7 @@ export const TopPage = () => {
   const [displayChangeFlag, setDisplayChangeFlag] = useState(true);
   return (
     <>
-      <div className="border flex bg-cyan-900 text-white border-cyan-900">
+      <div className="border flex bg-cyan-900 text-white border-cyan-900 mt-8">
         <button
           className={displayChangeFlag ? "" : " bg-white text-cyan-900"}
           onClick={() =>
